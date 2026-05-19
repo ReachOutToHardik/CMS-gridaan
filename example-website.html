@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Website</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        .slider-container { overflow: hidden; position: relative; height: 500px; }
+        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slide { min-width: 100%; height: 100%; object-fit: cover; }
+        .tab-btn.active { border-bottom: 3px solid #1e40af; color: #1e40af; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 id="schoolName" class="text-2xl font-bold text-blue-800">Loading School...</h1>
+            <div class="space-x-6 flex items-center">
+                <button onclick="showPage('home')" class="hover:text-blue-600 font-medium">Home</button>
+                <button onclick="showPage('disclosure')" class="hover:text-blue-600 font-medium">Mandatory Disclosure</button>
+                <a href="#" class="hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page: HOME -->
+    <div id="homePage">
+        <!-- Slider Section -->
+        <div class="slider-container bg-gray-200">
+            <div id="sliderTrack" class="slider-track"></div>
+            <button onclick="moveSlide(-1)" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70">❮</button>
+            <button onclick="moveSlide(1)" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70">❯</button>
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto py-12 px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" id="heroTitle">Welcome to our School</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto" id="heroDesc">Education for a better future.</p>
+            </div>
+            <h3 class="text-2xl font-bold mb-6 border-b-2 border-blue-800 pb-2 inline-block">School Gallery</h3>
+            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+    </div>
+
+    <!-- Page: MANDATORY DISCLOSURE -->
+    <div id="disclosurePage" class="hidden container mx-auto py-12 px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center text-blue-900">Mandatory Public Disclosure</h2>
+        <div id="disclosureSections" class="space-y-12">
+            <!-- Sections will be injected here -->
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let images = [];
+        let schoolData = {};
+
+        function showPage(pageId) {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('disclosurePage').classList.add('hidden');
+            document.getElementById(pageId + 'Page').classList.remove('hidden');
+        }
+
+        async function loadData() {
+            try {
+                const res = await fetch('http://localhost:3000/api/school-data');
+                schoolData = await res.json();
+
+                // Update text
+                document.getElementById('schoolName').textContent = schoolData.schoolName || 'Zenith Public School';
+                document.getElementById('heroTitle').textContent = schoolData.schoolName || 'Welcome';
+                document.getElementById('heroDesc').textContent = schoolData.tagline || '';
+
+                // Load Gallery/Slider
+                // The new data structure uses photoAlbums[0].images
+                images = (schoolData.photoAlbums && schoolData.photoAlbums[0] && schoolData.photoAlbums[0].images) || [];
+                const track = document.getElementById('sliderTrack');
+                const grid = document.getElementById('galleryGrid');
+
+                if (images.length === 0) {
+                    track.innerHTML = '<div class="flex items-center justify-center w-full h-full text-gray-500 bg-gray-200">No images uploaded yet.</div>';
+                    grid.innerHTML = '<p class="text-gray-500">The school has not added any gallery images yet.</p>';
+                } else {
+                    track.innerHTML = images.map(img => `<img src="${img.url}" class="slide" alt="School image">`).join('');
+                    grid.innerHTML = images.map(img => `
+                        <div class="group relative overflow-hidden rounded-xl shadow-lg aspect-square bg-gray-100">
+                            <img src="${img.url}" class="w-full h-full object-cover transform transition-transform group-hover:scale-110" alt="Gallery">
+                        </div>
+                    `).join('');
+                }
+
+                // Inject Disclosure Data
+                const disclosureContainer = document.getElementById('disclosureSections');
+                if (schoolData.disclosureData) {
+                    disclosureContainer.innerHTML = schoolData.disclosureData.map(section => `
+                        <div>
+                            <h3 class="text-xl font-bold bg-blue-900 text-white p-3 rounded-t-lg">${section.title}</h3>
+                            <div class="overflow-x-auto shadow-md rounded-b-lg">
+                                <table class="w-full text-left bg-white">
+                                    <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                                        <tr>
+                                            <th class="px-4 py-3 border">Sr. No.</th>
+                                            <th class="px-4 py-3 border">Information</th>
+                                            <th class="px-4 py-3 border">Details / View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-sm">
+                                        ${section.rows.map((row, idx) => `
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="px-4 py-3 border font-medium">${idx + 1}</td>
+                                                <td class="px-4 py-3 border">${row.field}</td>
+                                                <td class="px-4 py-3 border">
+                                                    ${row.link ? `<a href="${row.link}" target="_blank" class="text-blue-600 underline font-bold">${row.detail || 'View'}</a>` : row.detail}
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+            } catch (err) {
+                console.error('Failed to load:', err);
+                document.getElementById('schoolName').textContent = 'Error Loading Site';
+            }
+        }
+
+        function moveSlide(direction) {
+            const track = document.getElementById('sliderTrack');
+            if (!images.length) return;
+            currentSlide = (currentSlide + direction + images.length) % images.length;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        setInterval(() => moveSlide(1), 5000);
+        loadData();
+    </script>
+</body>
+</html>
