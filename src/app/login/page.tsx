@@ -37,7 +37,7 @@ export default function LoginPage() {
               type="email"
               required
               autoComplete="email"
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-md text-sm outline-none focus:border-gray-400 transition-colors bg-white"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-md text-sm outline-none focus:border-gray-400 transition-colors bg-white text-slate-800 placeholder-gray-500"
               placeholder="admin@school.com"
               value={email}
               onChange={(e) => { setEmail(e.target.value); setError(""); }}
@@ -49,7 +49,7 @@ export default function LoginPage() {
               type="password"
               required
               autoComplete="current-password"
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-md text-sm outline-none focus:border-gray-400 transition-colors bg-white"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-md text-sm outline-none focus:border-gray-400 transition-colors bg-white text-slate-800 placeholder-gray-500"
               placeholder="••••••••"
               value={password}
               onChange={(e) => { setPassword(e.target.value); setError(""); }}
