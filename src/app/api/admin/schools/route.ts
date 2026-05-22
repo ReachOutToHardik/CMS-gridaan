@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 
     const { data, error } = await supabase
       .from('schools')
-      .select('id, admin_email, admin_password, slug, live_url, data');
+      .select('id, admin_email, admin_password, school_name, live_url, data');
 
     if (error) {
       return addCorsHeaders(NextResponse.json({ error: error.message }, { status: 500 }));
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
       id: school.id,
       admin_email: school.admin_email,
       admin_password: school.admin_password,
-      slug: school.slug,
+      school_name: school.school_name,
       live_url: school.live_url || '/preview',
       phone: school.data?.phone || 'N/A'
     }));

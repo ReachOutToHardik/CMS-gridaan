@@ -24,10 +24,10 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { admin_email, admin_password, slug } = body;
+    const { admin_email, admin_password, school_name } = body;
 
-    if (!admin_email || !admin_password || !slug) {
-      return addCorsHeaders(NextResponse.json({ error: 'Missing required fields: admin_email, admin_password, slug.' }, { status: 400 }));
+    if (!admin_email || !admin_password || !school_name) {
+      return addCorsHeaders(NextResponse.json({ error: 'Missing required fields: admin_email, admin_password, school_name.' }, { status: 400 }));
     }
 
     // Insert new school. Supabase with pgcrypto will auto-generate the UUID if we use gen_random_uuid(),
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
         id: newId,
         admin_email,
         admin_password,
-        slug,
+        school_name,
         data: {} // Empty initial JSONB data
       })
       .select();
