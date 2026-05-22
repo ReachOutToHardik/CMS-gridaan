@@ -69,6 +69,8 @@ export default function Dashboard() {
   const [active, setActive] = useState("identity");
   const router = useRouter();
 
+  const [liveUrl, setLiveUrl] = useState("/preview");
+
   useEffect(() => {
     if (!localStorage.getItem("isLoggedIn")) {
       router.push("/login");
@@ -79,6 +81,8 @@ export default function Dashboard() {
       router.push("/login");
       return;
     }
+
+    setLiveUrl(localStorage.getItem("liveUrl") || "/preview");
 
     fetch(`/api/school-data?schoolId=${schoolId}`)
       .then(r => r.json())
@@ -196,7 +200,7 @@ export default function Dashboard() {
         {/* Bottom Actions */}
         <div className="px-2 py-3 border-t border-gray-100 space-y-1.5">
           <Link
-            href="/preview"
+            href={liveUrl}
             target="_blank"
             className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded transition-all"
           >

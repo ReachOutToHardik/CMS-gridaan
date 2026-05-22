@@ -24,7 +24,8 @@ export default function LoginPage() {
 
       if (res.ok && data.success) {
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("schoolId", data.schoolId); // Store the UUID
+        localStorage.setItem("schoolId", data.schoolId);
+        localStorage.setItem("liveUrl", data.liveUrl || "/preview");
         router.push("/dashboard");
       } else {
         setError(data.error || "Incorrect email or password. Please try again.");

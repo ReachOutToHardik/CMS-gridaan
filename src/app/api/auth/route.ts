@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     // Query the database for the matching school credentials
     const { data, error } = await supabase
       .from('schools')
-      .select('id, admin_email, admin_password')
+      .select('id, admin_email, admin_password, live_url')
       .eq('admin_email', email)
       .single();
 
@@ -32,8 +32,8 @@ export async function POST(request: Request) {
       return addCorsHeaders(NextResponse.json({ error: 'Invalid credentials.' }, { status: 401 }));
     }
 
-    // Return the specific school's UUID for subsequent API calls
-    return addCorsHeaders(NextResponse.json({ success: true, schoolId: data.id }));
+    // Return the specific school's UUID and live_url for subsequent API calls
+    return addCorsHeaders(NextResponse.json({ success: true, schoolId: data.id, liveUrl: data.live_url || '/preview' }));
 
   } catch (err) {
     console.error('Server Auth POST Error:', err);
