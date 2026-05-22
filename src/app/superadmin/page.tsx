@@ -103,7 +103,7 @@ export default function SuperadminPage() {
             type="password" 
             value={masterKey}
             onChange={(e) => setMasterKey(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400"
+            className="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400 text-slate-800 placeholder-gray-500"
             placeholder="Master Key"
             required
           />
@@ -158,7 +158,7 @@ export default function SuperadminPage() {
                           autoFocus
                           value={tempUrl} 
                           onChange={(e) => setTempUrl(e.target.value)}
-                          className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs outline-none" 
+                          className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs outline-none text-slate-800" 
                         />
                         <button onClick={() => saveLiveUrl(school.id)} className="text-green-600 hover:text-green-700"><Save className="w-4 h-4" /></button>
                       </div>
@@ -197,9 +197,9 @@ export default function SuperadminPage() {
             <h2 className="font-bold text-gray-900 flex items-center gap-2"><Plus className="w-4 h-4" /> Register New School</h2>
             <form onSubmit={handleAddSchool} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <input required placeholder="School Slug (e.g. springfield)" value={newSchool.slug} onChange={e => setNewSchool({...newSchool, slug: e.target.value})} className="col-span-2 px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400" />
-                <input required type="email" placeholder="Admin Email" value={newSchool.admin_email} onChange={e => setNewSchool({...newSchool, admin_email: e.target.value})} className="px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400" />
-                <input required type="text" placeholder="Admin Password" value={newSchool.admin_password} onChange={e => setNewSchool({...newSchool, admin_password: e.target.value})} className="px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400" />
+                <input required placeholder="School Slug (e.g. springfield)" value={newSchool.slug} onChange={e => setNewSchool({...newSchool, slug: e.target.value})} className="col-span-2 px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400 text-slate-800 placeholder-gray-500" />
+                <input required type="email" placeholder="Admin Email" value={newSchool.admin_email} onChange={e => setNewSchool({...newSchool, admin_email: e.target.value})} className="px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400 text-slate-800 placeholder-gray-500" />
+                <input required type="text" placeholder="Admin Password" value={newSchool.admin_password} onChange={e => setNewSchool({...newSchool, admin_password: e.target.value})} className="px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400 text-slate-800 placeholder-gray-500" />
               </div>
               <button disabled={adding} type="submit" className="w-full bg-gray-900 text-white py-2 rounded-md text-sm font-semibold hover:bg-gray-800 disabled:opacity-50">
                 {adding ? "Registering..." : "Add School"}
