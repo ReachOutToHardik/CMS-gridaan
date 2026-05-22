@@ -47,6 +47,7 @@ export default function LoginPage() {
           <div className="space-y-1.5">
             <label className="block text-xs font-medium text-gray-500">Email</label>
             <input
+              suppressHydrationWarning
               type="email"
               required
               autoComplete="email"
@@ -59,6 +60,7 @@ export default function LoginPage() {
           <div className="space-y-1.5">
             <label className="block text-xs font-medium text-gray-500">Password</label>
             <input
+              suppressHydrationWarning
               type="password"
               required
               autoComplete="current-password"

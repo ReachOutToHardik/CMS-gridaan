@@ -39,6 +39,14 @@ export interface Achievement {
   image?: string;
 }
 
+export interface Topper {
+  id: string;
+  name: string;
+  percentage: string; // Stored as string to allow decimals
+  stream?: string; // Optional, useful for Class 12 (e.g. "Science", "Commerce")
+  photo: string;
+}
+
 export interface FacilityItem {
   id: string;
   title: string;
@@ -144,6 +152,8 @@ export interface SchoolData {
   notices: Notice[];
   upcomingEvents: EventItem[];
   achievements: Achievement[];
+  class10Toppers: Topper[];
+  class12Toppers: Topper[];
   photoAlbums: PhotoAlbum[];
   testimonials: TestimonialItem[];
   footerAboutText: string;
@@ -247,6 +257,13 @@ export const initialData: SchoolData = {
   achievements: [
     { id: "1", title: "District Top Rank in CBSE Class XII", year: "2025", description: "Three students secured 98%+ aggregate in the CBSE Board examinations.", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=200" },
     { id: "2", title: "Inter-School Sports Champions", year: "2025", description: "Gridaan Boys Football team won the zonal gold trophy.", image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=200" }
+  ],
+  class12Toppers: [
+    { id: "1", name: "Priya Sharma", percentage: "98.8", stream: "Science", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200" },
+    { id: "2", name: "Rahul Verma", percentage: "98.2", stream: "Commerce", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200" }
+  ],
+  class10Toppers: [
+    { id: "3", name: "Amit Yadav", percentage: "97.4", stream: "", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" }
   ],
   photoAlbums: [
     {

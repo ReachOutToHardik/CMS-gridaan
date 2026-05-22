@@ -101,6 +101,7 @@ export default function SuperadminPage() {
             <p className="text-sm text-gray-500 mt-1">Enter master key to manage client schools.</p>
           </div>
           <input 
+            suppressHydrationWarning
             type="password" 
             value={masterKey}
             onChange={(e) => setMasterKey(e.target.value)}
@@ -272,6 +273,8 @@ export default function SuperadminPage() {
                   <li><span className="text-blue-600">facultyMembers</span> (Array: id, name, designation, department, image, qualification, experience, bio)</li>
                   <li><span className="text-blue-600">upcomingEvents</span> (Array: id, title, date, description)</li>
                   <li><span className="text-blue-600">achievements</span> (Array: id, title, year, description, image)</li>
+                  <li><span className="text-blue-600">class12Toppers</span> (Array: id, name, percentage, stream, photo)</li>
+                  <li><span className="text-blue-600">class10Toppers</span> (Array: id, name, percentage, stream, photo)</li>
                   <li><span className="text-blue-600">photoAlbums</span> (Array: id, title, coverImage, images [id, url, caption])</li>
                   <li><span className="text-blue-600">testimonials</span> (Array: id, name, role, message, photo)</li>
                   <li><span className="text-blue-600">footerAboutText</span> (string)</li>

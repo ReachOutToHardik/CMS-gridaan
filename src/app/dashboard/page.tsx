@@ -11,6 +11,7 @@ import { SectionBanners, SectionPages, SectionGallery } from "./SectionBanners";
 import { SectionContent, SectionLeadership } from "./SectionContent";
 import { SectionAcademics, SectionFaculty, SectionActivities, SectionSettings } from "./SectionAcademics";
 import { SectionDisclosure } from "./SectionDisclosure";
+import SectionToppers from "./SectionToppers";
 
 const NAV_GROUPS = [
   {
@@ -19,6 +20,7 @@ const NAV_GROUPS = [
       { id: "identity", label: "School Identity" },
       { id: "banners", label: "Home Banners" },
       { id: "pages", label: "Pages & Menu" },
+      { id: "toppers", label: "Academic Toppers" },
     ]
   },
   {
@@ -50,6 +52,7 @@ const SECTION_TITLES: Record<string, { title: string; subtitle: string }> = {
   identity:   { title: "School Identity",         subtitle: "School name, logo, theme color and basic info." },
   banners:    { title: "Home Page Banners",        subtitle: "The large images that rotate on your home page." },
   pages:      { title: "Pages & Menu",             subtitle: "Create pages and choose which ones show in the top menu." },
+  toppers:    { title: "Academic Toppers",         subtitle: "Manage your highest achieving students." },
   content:    { title: "About & Notices",          subtitle: "About us text, vision, mission, stats and notice board." },
   leadership: { title: "Principal & Chairman",     subtitle: "Desk messages and photos of school leadership." },
   academics:  { title: "Academics",               subtitle: "Academic sections and subjects offered." },
@@ -102,7 +105,7 @@ export default function Dashboard() {
     setSaving(false);
   };
 
-  // Max sizes: logos/staff photos = 500 KB, banners/gallery = 2 MB
+  // Max sizes: logos/staff photos = 500 KB, banners/gallery = 2 MB, passport = 200 KB
   const LIMITS: Record<string, number> = {
     headerLogo: 500, footerLogo: 500, principalPhoto: 500, chairpersonPhoto: 500,
   };
@@ -114,7 +117,8 @@ export default function Dashboard() {
     const file = e.target.files?.[0]; if (!file) return;
     const name = e.target.name;
     const isDoc = name.startsWith("doc-");
-    const limitKB = isDoc ? 5120 : (LIMITS[name] ?? DEFAULT_LIMIT_KB);
+    const isTopper = name.startsWith("topper-");
+    const limitKB = isDoc ? 5120 : isTopper ? 200 : (LIMITS[name] ?? DEFAULT_LIMIT_KB);
     const limitBytes = limitKB * 1024;
 
     // Validate type
@@ -253,6 +257,7 @@ export default function Dashboard() {
             {active === "identity"   && <SectionIdentity   {...props} />}
             {active === "banners"    && <SectionBanners    {...props} />}
             {active === "pages"      && <SectionPages      {...props} />}
+            {active === "toppers"    && <SectionToppers    {...props} />}
             {active === "gallery"    && <SectionGallery    {...props} />}
             {active === "content"    && <SectionContent    {...props} />}
             {active === "leadership" && <SectionLeadership {...props} />}
