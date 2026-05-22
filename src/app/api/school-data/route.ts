@@ -14,12 +14,19 @@ export async function OPTIONS() {
   return addCorsHeaders(response);
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const schoolId = searchParams.get('schoolId');
+
+    if (!schoolId) {
+      return addCorsHeaders(NextResponse.json({ error: 'Missing schoolId parameter.' }, { status: 400 }));
+    }
+
     const { data, error } = await supabase
       .from('schools')
       .select('data')
-      .eq('id', 'primary-school')
+      .eq('id', schoolId)
       .single();
 
     if (error || !data) {
@@ -36,18 +43,23 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const schoolId = searchParams.get('schoolId');
+
+    if (!schoolId) {
+      return addCorsHeaders(NextResponse.json({ error: 'Missing schoolId parameter.' }, { status: 400 }));
+    }
+
     const body = await request.json();
     
     const { data, error } = await supabase
       .from('schools')
-      .upsert({ 
-        id: 'primary-school',
-        data: body 
-      }, { onConflict: 'id' })
+      .update({ data: body })
+      .eq('id', schoolId)
       .select();
 
     if (error) {
-      console.error('Supabase Upsert Error:', error);
+      console.error('Supabase Update Error:', error);
       return addCorsHeaders(NextResponse.json({ error: error.message }, { status: 500 }));
     }
 

@@ -501,8 +501,8 @@ export default function PreviewPage() {
                 </div>
                 <div className="md:col-span-2 grid sm:grid-cols-2 gap-8">
                   {(data.testimonials && data.testimonials.length > 0 ? data.testimonials : [
-                    { id: "1", name: "Dr. Santosh Tripathi", role: "Parent of Aarav, Class X", message: "Zenith Public School has provided an exceptional foundation for my son. The teachers are highly supportive and emphasize discipline and academic excellence.", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" },
-                    { id: "2", name: "Priya Singh", role: "Alumnus (Batch of 2022)", message: "The values and confidence I gained at Zenith helped me succeed at top universities. The balance between studies and sports is perfect.", photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" }
+                    { id: "1", name: "Dr. Santosh Tripathi", role: "Parent of Aarav, Class X", message: "Gridaan School has provided an exceptional foundation for my son. The teachers are highly supportive and emphasize discipline and academic excellence.", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" },
+                    { id: "2", name: "Priya Singh", role: "Alumnus (Batch of 2022)", message: "The values and confidence I gained at Gridaan helped me succeed at top universities. The balance between studies and sports is perfect.", photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" }
                   ]).map((test) => (
                     <div key={test.id} className="bg-gray-50 rounded-3xl p-8 border border-gray-200 shadow-lg space-y-6 flex flex-col justify-between border-t-8 border-brand-gold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                       <div className="space-y-4">

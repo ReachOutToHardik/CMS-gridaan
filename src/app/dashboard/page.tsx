@@ -70,8 +70,17 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!localStorage.getItem("isLoggedIn")) router.push("/login");
-    fetch("/api/school-data")
+    if (!localStorage.getItem("isLoggedIn")) {
+      router.push("/login");
+      return;
+    }
+    const schoolId = localStorage.getItem("schoolId");
+    if (!schoolId) {
+      router.push("/login");
+      return;
+    }
+
+    fetch(`/api/school-data?schoolId=${schoolId}`)
       .then(r => r.json())
       .then(d => { if (d && !d.error) setData({ ...initialData, ...d }); setLoading(false); })
       .catch(() => setLoading(false));
@@ -79,7 +88,8 @@ export default function Dashboard() {
 
   const handleSave = async () => {
     setSaving(true);
-    const r = await fetch("/api/school-data", {
+    const schoolId = localStorage.getItem("schoolId");
+    const r = await fetch(`/api/school-data?schoolId=${schoolId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

@@ -38,7 +38,9 @@ export function SectionBanners({ data, setData, upload, uploading }: Props) {
         <Card key={b.id}>
           <div className="flex items-center justify-between">
             <p className="text-xs font-semibold text-gray-500">Banner {i + 1}</p>
-            <button onClick={() => setData({ ...data, banners: data.banners.filter(x => x.id !== b.id) })} className="text-red-400 hover:text-red-600 text-xs flex items-center gap-1"><Trash2 className="w-3 h-3" /> Remove</button>
+            {data.banners.length > 1 && (
+              <button onClick={() => setData({ ...data, banners: data.banners.filter(x => x.id !== b.id) })} className="text-red-400 hover:text-red-600 text-xs flex items-center gap-1"><Trash2 className="w-3 h-3" /> Remove</button>
+            )}
           </div>
           <ImgUpload src={b.image} name={`b-${i}`} uploading={uploading} onUpload={(e: any) => upload(e, (url: string) => { const n = [...data.banners]; n[i].image = url; setData({ ...data, banners: n }); })} />
           <div className="grid grid-cols-2 gap-4">
@@ -49,9 +51,11 @@ export function SectionBanners({ data, setData, upload, uploading }: Props) {
           </div>
         </Card>
       ))}
-      <button onClick={add} className="flex items-center gap-2 w-full py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm font-medium text-gray-400 hover:border-gray-300 hover:text-gray-600 justify-center transition-colors">
-        <Plus className="w-4 h-4" /> Add New Banner
-      </button>
+      {data.banners.length < 4 && (
+        <button onClick={add} className="flex items-center gap-2 w-full py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm font-medium text-gray-400 hover:border-gray-300 hover:text-gray-600 justify-center transition-colors">
+          <Plus className="w-4 h-4" /> Add New Banner (Max 4)
+        </button>
+      )}
     </div>
   );
 }

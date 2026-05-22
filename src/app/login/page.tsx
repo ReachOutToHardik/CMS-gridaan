@@ -9,16 +9,28 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@school.com";
-    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "admin123";
-    
-    if (email === adminEmail && password === adminPassword) {
-      localStorage.setItem("isLoggedIn", "true");
-      router.push("/dashboard");
-    } else {
-      setError("Incorrect email or password. Please try again.");
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("schoolId", data.schoolId); // Store the UUID
+        router.push("/dashboard");
+      } else {
+        setError(data.error || "Incorrect email or password. Please try again.");
+      }
+    } catch (err) {
+      setError("An error occurred during login. Please try again.");
     }
   };
 

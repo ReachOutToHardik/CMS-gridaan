@@ -154,7 +154,7 @@ export interface SchoolData {
 }
 
 export const initialData: SchoolData = {
-  schoolName: "Zenith Public School",
+  schoolName: "Gridaan School",
   shortName: "ZPS",
   tagline: "Education for a better future",
   headerLogo: "https://placehold.co/240x80/1e293b/white?text=ZPS+Logo",
@@ -184,11 +184,11 @@ export const initialData: SchoolData = {
   youtubeLink: "https://youtube.com",
   twitterLink: "https://twitter.com",
   banners: [
-    { id: "1", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1800", title: "Zenith Public School", subtitle: "Empowering students through academic rigor and robust moral values.", buttonText: "Explore Campus", buttonLink: "about" },
+    { id: "1", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1800", title: "Gridaan School", subtitle: "Empowering students through academic rigor and robust moral values.", buttonText: "Explore Campus", buttonLink: "about" },
     { id: "2", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1800", title: "Holistic Excellence", subtitle: "State-of-the-art infrastructure combined with traditional cultural roots.", buttonText: "View Academics", buttonLink: "academics" },
     { id: "3", image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1800", title: "Nurturing Leaders", subtitle: "Committed faculty fostering intellectual curiosity and leadership.", buttonText: "Our Faculty", buttonLink: "faculty" }
   ],
-  aboutUsText: "Zenith Public School is situated at NH-28 Pipra Urf Titala Sukrauri, Hata Kushinagar, U.P. Affiliated with CBSE (Affiliation No: 2133590, School Code: 71741), we provide premium English Medium education from Nursery to Class XII. Our campus spans 9,295 sq. meters of lush green, secure environment equipped with modern classrooms, advanced science and computer laboratories, and vast sports facilities.",
+  aboutUsText: "Gridaan School is situated at NH-28 Pipra Urf Titala Sukrauri, Hata Kushinagar, U.P. Affiliated with CBSE (Affiliation No: 2133590, School Code: 71741), we provide premium English Medium education from Nursery to Class XII. Our campus spans 9,295 sq. meters of lush green, secure environment equipped with modern classrooms, advanced science and computer laboratories, and vast sports facilities.",
   aboutUsImage: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1800",
   visionText: "To be an institution of global excellence that fosters intellectual curiosity, ethical leadership, and dedicated citizenship grounded in Indian cultural values.",
   missionText: "To provide a rigorous academic curriculum and vibrant co-curricular environment where every student discovers their unique potential and builds robust moral character.",
@@ -210,10 +210,10 @@ export const initialData: SchoolData = {
     { id: "3", title: "Sports Complex", description: "Vast playground featuring a football pitch, volleyball courts, and indoor sports facilities fostering athletic excellence.", image: "https://images.unsplash.com/photo-1574629810360-7efbed1e9e71?q=80&w=800", linkText: "Explore Sports →", linkUrl: "activities" }
   ],
   chairpersonName: "Dr. R. K. Sharma",
-  chairpersonMessage: "Welcome to Zenith Public School. Our mission is to impart quality education that prepares children to excel in an increasingly complex world while staying anchored to their traditional values.",
+  chairpersonMessage: "Welcome to Gridaan School. Our mission is to impart quality education that prepares children to excel in an increasingly complex world while staying anchored to their traditional values.",
   chairpersonPhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400",
   principalName: "Mr. Vikash Mishra",
-  principalMessage: "Greetings to all parents and well-wishers! At Zenith Public School, we believe that education is about empowering individual potential. Our dedicated educators work tirelessly to ensure every child thrives in a secure, dynamic learning atmosphere.",
+  principalMessage: "Greetings to all parents and well-wishers! At Gridaan School, we believe that education is about empowering individual potential. Our dedicated educators work tirelessly to ensure every child thrives in a secure, dynamic learning atmosphere.",
   principalPhoto: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400",
   principalQualification: "MA. B.ed.",
   academicSections: [
@@ -242,11 +242,11 @@ export const initialData: SchoolData = {
   ],
   upcomingEvents: [
     { id: "1", title: "Annual Day Function 2026", date: "2026-04-15", description: "Cultural performances, award ceremony, and celebration of student achievements." },
-    { id: "2", title: "Inter-School Science Colloquium", date: "2026-05-10", description: "Regional science debate and quiz competition hosted at Zenith auditorium." }
+    { id: "2", title: "Inter-School Science Colloquium", date: "2026-05-10", description: "Regional science debate and quiz competition hosted at Gridaan auditorium." }
   ],
   achievements: [
     { id: "1", title: "District Top Rank in CBSE Class XII", year: "2025", description: "Three students secured 98%+ aggregate in the CBSE Board examinations.", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=200" },
-    { id: "2", title: "Inter-School Sports Champions", year: "2025", description: "Zenith Boys Football team won the zonal gold trophy.", image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=200" }
+    { id: "2", title: "Inter-School Sports Champions", year: "2025", description: "Gridaan Boys Football team won the zonal gold trophy.", image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=200" }
   ],
   photoAlbums: [
     {
@@ -265,10 +265,10 @@ export const initialData: SchoolData = {
     }
   ],
   testimonials: [
-    { id: "1", name: "Dr. Santosh Tripathi", role: "Parent of Aarav, Class X", message: "Zenith Public School has provided an exceptional foundation for my son. The teachers are highly supportive and emphasize discipline and academic excellence.", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" },
-    { id: "2", name: "Priya Singh", role: "Alumnus (Batch of 2022)", message: "The values and confidence I gained at Zenith helped me succeed at top universities. The balance between studies and sports is perfect.", photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" }
+    { id: "1", name: "Dr. Santosh Tripathi", role: "Parent of Aarav, Class X", message: "Gridaan School has provided an exceptional foundation for my son. The teachers are highly supportive and emphasize discipline and academic excellence.", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" },
+    { id: "2", name: "Priya Singh", role: "Alumnus (Batch of 2022)", message: "The values and confidence I gained at Gridaan helped me succeed at top universities. The balance between studies and sports is perfect.", photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" }
   ],
-  footerAboutText: "Zenith Public School, Kushinagar",
+  footerAboutText: "Gridaan School, Kushinagar",
   campusTimings: [
     { day: "Monday – Friday", time: "8:00 AM – 2:30 PM" },
     { day: "Saturday", time: "8:00 AM – 12:30 PM" },
@@ -283,7 +283,7 @@ export const initialData: SchoolData = {
     {
       title: "A. General Information",
       rows: [
-        { field: "Name of the school", detail: "Zenith Public School" },
+        { field: "Name of the school", detail: "Gridaan School" },
         { field: "Affiliation No", detail: "2133590" },
         { field: "School Code", detail: "71741" },
         { field: "Complete Address with pin code", detail: "NH-28 Pipra Urf Titala Sukrauri, Hata Kushinagar, U.P." },

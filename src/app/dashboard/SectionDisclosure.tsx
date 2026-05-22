@@ -97,7 +97,7 @@ export function SectionDisclosure({ data, setData, upload, uploading }: Props) {
                             newRows[rIndex] = { ...row, detail: e.target.value };
                             updateTable(tIndex, { ...table, rows: newRows });
                           }}
-                          placeholder="e.g. Zenith Public School or View Document"
+                          placeholder="e.g. Gridaan School or View Document"
                           className="w-full px-3 py-2 bg-white border border-gray-200 rounded text-xs text-gray-800 outline-none focus:border-gray-400"
                         />
                         {/* Specifically for Table E (Infrastructure) row with YouTube link */}
