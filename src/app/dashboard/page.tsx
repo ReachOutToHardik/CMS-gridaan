@@ -12,6 +12,7 @@ import { SectionContent, SectionLeadership } from "./SectionContent";
 import { SectionAcademics, SectionFaculty, SectionActivities, SectionSettings } from "./SectionAcademics";
 import { SectionDisclosure } from "./SectionDisclosure";
 import SectionToppers from "./SectionToppers";
+import SectionCareers from "./SectionCareers";
 
 const NAV_GROUPS = [
   {
@@ -30,6 +31,7 @@ const NAV_GROUPS = [
       { id: "leadership", label: "Principal & Chairman" },
       { id: "academics", label: "Academics" },
       { id: "faculty", label: "Staff Members" },
+      { id: "careers", label: "Careers & Jobs" },
       { id: "activities", label: "Activities & Events" },
     ]
   },
@@ -57,6 +59,7 @@ const SECTION_TITLES: Record<string, { title: string; subtitle: string }> = {
   leadership: { title: "Principal & Chairman",     subtitle: "Desk messages and photos of school leadership." },
   academics:  { title: "Academics",               subtitle: "Academic sections and subjects offered." },
   faculty:    { title: "Staff Members",            subtitle: "All teachers and non-teaching staff." },
+  careers:    { title: "Careers & Jobs",           subtitle: "Manage job postings to hire talent." },
   activities: { title: "Activities & Events",      subtitle: "Co-curricular activities and upcoming school events." },
   gallery:    { title: "Photo Albums",             subtitle: "Create albums for different events and occasions." },
   settings:   { title: "Settings & Contact",       subtitle: "Contact details, social media, CBSE info and office timings." },
@@ -263,6 +266,7 @@ export default function Dashboard() {
             {active === "leadership" && <SectionLeadership {...props} />}
             {active === "academics"  && <SectionAcademics  {...props} />}
             {active === "faculty"    && <SectionFaculty    {...props} />}
+            {active === "careers"    && <SectionCareers    {...props} />}
             {active === "activities" && <SectionActivities {...props} />}
             {active === "settings"   && <SectionSettings   {...props} />}
             {active === "disclosure" && <SectionDisclosure {...props} />}

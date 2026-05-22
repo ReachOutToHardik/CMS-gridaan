@@ -19,6 +19,13 @@ export default function SuperadminPage() {
   const [tempUrl, setTempUrl] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
+  const magicLogin = (school: any) => {
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("schoolId", school.id);
+    localStorage.setItem("liveUrl", school.live_url || "/preview");
+    window.open("/dashboard", "_blank");
+  };
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (masterKey) {
@@ -193,13 +200,24 @@ export default function SuperadminPage() {
                         )}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button 
-                          onClick={() => copyToClipboard(`https://cmsgridaan.vercel.app/api/school-data?schoolId=${school.id}`, school.id)}
-                          className="inline-flex items-center gap-1.5 text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded hover:bg-gray-200 transition-colors"
-                        >
-                          {copiedId === school.id ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Copy className="w-3.5 h-3.5" />}
-                          {school.id.substring(0, 8)}...
-                        </button>
+                        <div className="flex items-center justify-end gap-2">
+                          <button 
+                            onClick={() => copyToClipboard(`https://cmsgridaan.vercel.app/api/school-data?schoolId=${school.id}`, school.id)}
+                            className="inline-flex items-center gap-1.5 text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded hover:bg-gray-200 transition-colors"
+                            title="Copy API Endpoint"
+                          >
+                            {copiedId === school.id ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Copy className="w-3.5 h-3.5" />}
+                            {school.id.substring(0, 8)}...
+                          </button>
+                          <button
+                            onClick={() => magicLogin(school)}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200 px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                            title="Login as this School"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            Login
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -273,6 +291,7 @@ export default function SuperadminPage() {
                   <li><span className="text-blue-600">facultyMembers</span> (Array: id, name, designation, department, image, qualification, experience, bio)</li>
                   <li><span className="text-blue-600">upcomingEvents</span> (Array: id, title, date, description)</li>
                   <li><span className="text-blue-600">achievements</span> (Array: id, title, year, description, image)</li>
+                  <li><span className="text-blue-600">jobOpenings</span> (Array: id, title, type, location, experience, description, applyLink)</li>
                   <li><span className="text-blue-600">class12Toppers</span> (Array: id, name, percentage, stream, photo)</li>
                   <li><span className="text-blue-600">class10Toppers</span> (Array: id, name, percentage, stream, photo)</li>
                   <li><span className="text-blue-600">photoAlbums</span> (Array: id, title, coverImage, images [id, url, caption])</li>

@@ -47,6 +47,16 @@ export interface Topper {
   photo: string;
 }
 
+export interface JobOpening {
+  id: string;
+  title: string;
+  type: "Full-time" | "Part-time" | "Contract";
+  location: "On-site" | "Remote" | "Hybrid";
+  experience: string;
+  description: string;
+  applyLink: string;
+}
+
 export interface FacilityItem {
   id: string;
   title: string;
@@ -154,6 +164,7 @@ export interface SchoolData {
   achievements: Achievement[];
   class10Toppers: Topper[];
   class12Toppers: Topper[];
+  jobOpenings: JobOpening[];
   photoAlbums: PhotoAlbum[];
   testimonials: TestimonialItem[];
   footerAboutText: string;
@@ -264,6 +275,10 @@ export const initialData: SchoolData = {
   ],
   class10Toppers: [
     { id: "3", name: "Amit Yadav", percentage: "97.4", stream: "", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" }
+  ],
+  jobOpenings: [
+    { id: "1", title: "PGT Physics Teacher", type: "Full-time", location: "On-site", experience: "3-5 Years", description: "Looking for an experienced Physics teacher for senior secondary classes. Must have a Master's degree and B.Ed.", applyLink: "mailto:careers@gridaan.edu" },
+    { id: "2", title: "Primary School Coordinator", type: "Full-time", location: "On-site", experience: "5+ Years", description: "Seeking a dynamic coordinator to lead the primary wing curriculum and activities.", applyLink: "mailto:careers@gridaan.edu" }
   ],
   photoAlbums: [
     {
