@@ -37,7 +37,18 @@ export default function PreviewPage() {
   const [showTicker, setShowTicker] = useState(true);
 
   useEffect(() => {
-    fetch("/api/school-data")
+    // Attempt to get schoolId from URL query parameter
+    const params = new URLSearchParams(window.location.search);
+    let schoolId = params.get("schoolId");
+
+    // Fallback to localStorage if we are in preview mode
+    if (!schoolId && typeof window !== "undefined") {
+      schoolId = localStorage.getItem("schoolId");
+    }
+
+    const fetchUrl = schoolId ? `/api/school-data?schoolId=${schoolId}` : "/api/school-data";
+
+    fetch(fetchUrl)
       .then(r => r.json())
       .then(d => {
         if (d && !d.error) setData({ ...initialData, ...d });

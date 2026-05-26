@@ -88,7 +88,12 @@ export default function Dashboard() {
       return;
     }
 
-    setLiveUrl(localStorage.getItem("liveUrl") || "/preview");
+    const storedLiveUrl = localStorage.getItem("liveUrl") || "/preview";
+    if (storedLiveUrl.startsWith("/preview")) {
+      setLiveUrl(`${storedLiveUrl}?schoolId=${schoolId}`);
+    } else {
+      setLiveUrl(storedLiveUrl);
+    }
 
     fetch(`/api/school-data?schoolId=${schoolId}`)
       .then(r => r.json())
@@ -164,59 +169,73 @@ export default function Dashboard() {
   const current = SECTION_TITLES[active];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex font-sans text-gray-800" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-slate-50 flex font-sans text-slate-800" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
 
       {/* Sidebar */}
-      <aside className="w-56 bg-white border-r border-gray-200 flex flex-col sticky top-0 h-screen shrink-0">
+      <aside className="w-56 bg-[#f7f6f2] border-r border-slate-200 flex flex-col sticky top-0 h-screen shrink-0 shadow-xs">
         {/* Logo Area */}
-        <div className="px-5 py-4 border-b border-gray-100">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-gray-900 rounded flex items-center justify-center">
-              <Monitor className="w-3.5 h-3.5 text-white" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-900 leading-none">School CMS</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Admin Panel</p>
-            </div>
-          </div>
+        <div className="px-5 py-5.5 border-b border-slate-200/60 flex flex-col text-center items-center justify-center">
+          <p className="text-lg font-black text-slate-800 tracking-tight leading-none uppercase">Gridaan CMS</p>
+          <p className="text-[9px] text-[#0f766e] font-extrabold mt-1.5 uppercase tracking-widest">ADMIN PANEL</p>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-3 px-2">
-          {NAV_GROUPS.map(group => (
-            <div key={group.group} className="mb-4">
-              <p className="px-3 mb-1 text-[9px] font-bold text-gray-400 uppercase tracking-widest">{group.group}</p>
-              {group.items.map(item => (
-                <button
-                  key={item.id}
-                  onClick={() => setActive(item.id)}
-                  className={cn(
-                    "w-full text-left px-3 py-2 rounded text-xs transition-all mb-0.5",
-                    active === item.id
-                      ? "bg-gray-900 text-white font-semibold"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 font-medium"
-                  )}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          ))}
+        <nav className="flex-1 overflow-y-auto py-4 px-3 custom-sidebar-scrollbar space-y-3">
+          {NAV_GROUPS.map(group => {
+            // Sleek card styling for each group to prevent them from looking merged
+            let boxClass = "bg-slate-50 border border-slate-100";
+            let borderClass = "border-l-slate-400";
+            let textClass = "text-slate-700";
+            if (group.group === "Website") { boxClass = "bg-amber-50/50 border border-amber-200/40"; borderClass = "border-l-amber-500"; textClass = "text-amber-900"; }
+            if (group.group === "Content") { boxClass = "bg-emerald-50/50 border border-emerald-200/40"; borderClass = "border-l-emerald-500"; textClass = "text-emerald-900"; }
+            if (group.group === "Media") { boxClass = "bg-violet-50/50 border border-violet-200/40"; borderClass = "border-l-violet-500"; textClass = "text-violet-900"; }
+            if (group.group === "Admin") { boxClass = "bg-sky-50/50 border border-sky-200/40"; borderClass = "border-l-sky-500"; textClass = "text-sky-900"; }
+
+            return (
+              <div key={group.group} className={cn("p-2.5 rounded-lg space-y-2.5 shadow-3xs", boxClass)}>
+                <div className="px-1 flex items-center">
+                  <span className={cn(
+                    "border-l-2 pl-2 text-[10px] font-extrabold uppercase tracking-wider leading-none",
+                    borderClass,
+                    textClass
+                  )}>
+                    {group.group}
+                  </span>
+                </div>
+                <div className="space-y-0.5">
+                  {group.items.map(item => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActive(item.id)}
+                      className={cn(
+                        "w-full text-left py-2 px-2.5 rounded-md text-sm transition-all flex items-center font-semibold cursor-pointer",
+                        active === item.id
+                          ? "bg-[#0f766e] text-white shadow-xs font-bold"
+                          : "text-slate-650 hover:bg-[#0f766e]/5 hover:text-[#0f766e]"
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </nav>
 
         {/* Bottom Actions */}
-        <div className="px-2 py-3 border-t border-gray-100 space-y-1.5">
+        <div className="p-3 border-t border-slate-100 space-y-1">
           <Link
             href={liveUrl}
             target="_blank"
-            className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded transition-all"
+            className="flex items-center gap-2 w-full px-3 py-2 text-xs font-bold text-[#0f766e] bg-[#0f766e]/5 hover:bg-[#0f766e]/10 border border-[#0f766e]/20 rounded-md transition-all justify-center"
           >
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 text-[#0f766e]" />
             View Website
           </Link>
           <button
             onClick={() => { localStorage.removeItem("isLoggedIn"); router.push("/login"); }}
-            className="flex items-center gap-2 w-full px-3 py-2 text-xs font-medium text-gray-400 hover:bg-red-50 hover:text-red-500 rounded transition-all"
+            className="flex items-center gap-2 w-full px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-rose-50 hover:text-rose-600 rounded-md transition-all justify-center"
           >
             <LogOut className="w-3.5 h-3.5" />
             Logout
@@ -227,19 +246,19 @@ export default function Dashboard() {
       {/* Main Area */}
       <div className="flex-1 flex flex-col min-w-0">
 
-        <header className="bg-white border-b border-gray-200 px-8 py-3.5 flex items-center justify-between sticky top-0 z-10">
+        <header className="bg-[#fdfdfb] border-b border-slate-200/60 px-8 py-3.5 flex items-center justify-between sticky top-0 z-10 shadow-3xs">
           <div>
-            <h1 className="text-sm font-semibold text-gray-900">{current.title}</h1>
-            <p className="text-[11px] text-gray-400 mt-0.5">{current.subtitle}</p>
+            <h1 className="text-sm font-bold text-slate-900 tracking-tight">{current.title}</h1>
+            <p className="text-[10px] text-slate-400 font-semibold mt-0.5 uppercase tracking-wider">{current.subtitle}</p>
           </div>
           <button
             onClick={handleSave}
             disabled={saving}
             className={cn(
-              "flex items-center gap-2 px-5 py-2 rounded text-xs font-semibold transition-all",
+              "flex items-center gap-2 px-4 py-2 rounded-md text-xs font-semibold transition-all shadow-xs cursor-pointer",
               saved
-                ? "bg-green-50 text-green-700 border border-green-200"
-                : "bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50"
+                ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                : "bg-[#0f766e] text-white hover:bg-[#0d605a] disabled:opacity-50"
             )}
           >
             {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : saved ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Save className="w-3.5 h-3.5" />}
@@ -255,7 +274,7 @@ export default function Dashboard() {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto px-8 py-8">
+        <main className="flex-1 overflow-y-auto px-8 py-8 bg-[#fdfdfb]/40">
           <div className="max-w-3xl">
             {active === "identity"   && <SectionIdentity   {...props} />}
             {active === "banners"    && <SectionBanners    {...props} />}

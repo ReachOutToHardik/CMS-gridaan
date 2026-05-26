@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "School CMS Portal",
+  title: "Gridaan CMS Portal",
   description: "Manage your school website effortlessly",
 };
 

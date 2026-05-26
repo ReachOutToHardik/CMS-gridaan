@@ -33,13 +33,13 @@ export default function SectionToppers({ data, setData, upload, uploading }: Pro
 
   const renderTopperList = (title: string, type: 'class10Toppers' | 'class12Toppers', showStream: boolean) => (
     <div className="space-y-4">
-      <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-        <h3 className="text-sm font-bold text-gray-900">{title}</h3>
+      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+        <h3 className="text-sm font-bold text-slate-800 font-sans tracking-tight">{title}</h3>
         <button
           onClick={() => addTopper(type)}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-700 text-xs font-semibold rounded hover:bg-gray-200 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-700 text-xs font-bold rounded-md hover:bg-slate-200 transition-all cursor-pointer"
         >
-          <Plus className="w-3.5 h-3.5" />
+          <Plus className="w-3.5 h-3.5 text-[#1e3a8a]" />
           Add Topper
         </button>
       </div>
@@ -125,8 +125,8 @@ export default function SectionToppers({ data, setData, upload, uploading }: Pro
   return (
     <div className="space-y-10">
       <div>
-        <h2 className="text-sm font-semibold text-gray-900">Academic Toppers</h2>
-        <p className="text-xs text-gray-500 mt-0.5">Showcase your highest achieving students in board exams.</p>
+        <h2 className="text-sm font-bold text-slate-800 font-sans tracking-tight">Academic Toppers</h2>
+        <p className="text-xs text-slate-500 mt-0.5">Showcase your highest achieving students in board exams.</p>
       </div>
 
       {renderTopperList("Class 12 Board Toppers", "class12Toppers", true)}

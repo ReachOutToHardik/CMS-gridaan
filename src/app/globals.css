@@ -30,7 +30,22 @@ body {
 
 @layer base {
   h1, h2, h3, h4 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-weight: 700;
   }
+}
+
+/* Custom integrated scrollbar for sidebar nav */
+.custom-sidebar-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(15, 118, 110, 0.15);
+  border-radius: 10px;
+}
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 118, 110, 0.3);
 }

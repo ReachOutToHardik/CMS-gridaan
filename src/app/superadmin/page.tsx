@@ -101,22 +101,22 @@ export default function SuperadminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 max-w-sm w-full space-y-6">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 max-w-sm w-full space-y-6">
           <div>
-            <h1 className="text-xl font-bold flex items-center gap-2"><Key className="w-5 h-5 text-gray-400" /> Superadmin Portal</h1>
-            <p className="text-sm text-gray-500 mt-1">Enter master key to manage client schools.</p>
+            <h1 className="text-xl font-bold flex items-center gap-2 text-slate-900"><Key className="w-5 h-5 text-slate-400" /> Superadmin Portal</h1>
+            <p className="text-xs text-slate-400 mt-1">Enter master key to manage client schools.</p>
           </div>
           <input 
             suppressHydrationWarning
             type="password" 
             value={masterKey}
             onChange={(e) => setMasterKey(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-gray-400 text-slate-800 placeholder-gray-500"
+            className="w-full px-3 py-2 border border-slate-200 rounded-md text-sm outline-none focus:border-[#0f766e] focus:ring-1 focus:ring-[#0f766e] text-slate-800 placeholder-slate-400"
             placeholder="Master Key"
             required
           />
-          <button className="w-full bg-gray-900 text-white py-2 rounded-md text-sm font-semibold hover:bg-gray-800">
+          <button className="w-full bg-[#0f766e] text-white py-2 rounded-md text-sm font-semibold hover:bg-[#0d605a] transition-all cursor-pointer">
             Access Dashboard
           </button>
         </form>
@@ -125,22 +125,22 @@ export default function SuperadminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8 font-sans">
+    <div className="min-h-screen bg-slate-50 p-8 font-sans text-slate-800">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        <div className="flex items-center justify-between border-b border-gray-200 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Schools Manager</h1>
+            <h1 className="text-2xl font-bold text-slate-900">Schools Manager</h1>
             <div className="flex gap-4 mt-3">
               <button 
                 onClick={() => setActiveTab("dashboard")} 
-                className={`text-sm font-medium pb-1 border-b-2 ${activeTab === "dashboard" ? "border-gray-900 text-gray-900" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+                className={`text-sm font-semibold pb-2.5 border-b-2 transition-all ${activeTab === "dashboard" ? "border-[#0f766e] text-[#0f766e]" : "border-transparent text-slate-400 hover:text-slate-600"}`}
               >
                 Dashboard
               </button>
               <button 
                 onClick={() => setActiveTab("docs")} 
-                className={`text-sm font-medium pb-1 border-b-2 ${activeTab === "docs" ? "border-gray-900 text-gray-900" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+                className={`text-sm font-semibold pb-2.5 border-b-2 transition-all ${activeTab === "docs" ? "border-[#0f766e] text-[#0f766e]" : "border-transparent text-slate-400 hover:text-slate-600"}`}
               >
                 API Docs
               </button>
@@ -190,7 +190,7 @@ export default function SuperadminPage() {
                           </div>
                         ) : (
                           <div className="flex items-center justify-between group">
-                            <a href={school.live_url} target="_blank" className="text-blue-600 hover:underline flex items-center gap-1.5 truncate max-w-[200px]">
+                            <a href={school.live_url} target="_blank" className="text-teal-600 hover:underline flex items-center gap-1.5 truncate max-w-[200px]">
                               {school.live_url}
                             </a>
                             <button onClick={() => { setEditingUrl(school.id); setTempUrl(school.live_url); }} className="text-gray-400 hover:text-gray-900 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -211,7 +211,7 @@ export default function SuperadminPage() {
                           </button>
                           <button
                             onClick={() => magicLogin(school)}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200 px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold bg-teal-50 text-teal-600 border border-teal-200 px-2 py-1 rounded hover:bg-teal-100 hover:text-teal-700 transition-colors"
                             title="Login as this School"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
